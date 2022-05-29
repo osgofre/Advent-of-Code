@@ -38,8 +38,31 @@ def play(numbers, boards):
                     return np.sum(board) * number
 
 
+def last_winner(numbers, boards):
+    winners = [False]*(boards.shape[2]-1)
+    for number in numbers:
+        w = 0
+        for board in boards.T[1:, :, :]:
+            if winners[w] == True:
+                pass
+            else:
+                if number in board:
+                    i, j = np.where(board == number)
+                    board[i, j] = 0
+                    if 0 in np.sum(board, axis=0) or 0 in np.sum(board, axis=1):
+                        winners[w] = True
+                        if sum(winners) == (boards.shape[2]-1):
+                            return np.sum(board) * number
+            w += 1
+
+
 # Code
+# Part 1
 input = file_to_array('input04.txt')
 numbers, boards = get_boards(input)
-score = play(numbers, boards)
+# score = play(numbers, boards)
+# print('Score:', score)
+
+# Part 2
+score = last_winner(numbers, boards)
 print('Score:', score)
