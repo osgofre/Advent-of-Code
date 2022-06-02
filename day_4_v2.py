@@ -1,6 +1,5 @@
 # --- Day 4: Giant Squid ---
 
-import re
 import numpy as np
 
 
