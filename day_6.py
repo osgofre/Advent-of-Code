@@ -20,12 +20,27 @@ def simulate(input, days):
     aux = input
     for i in range(days):
         aux = count_day(aux)
+        print('Day', i, 'Fish:', len(aux))
     return len(aux)
+
+
+def simulate_2(input, days):
+    for i in range(days):
+        expired_fish = input.pop(0)
+        input[6] += expired_fish
+        input.append(expired_fish)
+    return sum(input)
 
 
 # Code
 # Part 1
+input = file_to_list('input.txt')
+# fish = simulate(input, 256)
+# print('Number of fish:', fish)
+
+
+# Part 2
 input = file_to_list('input06.txt')
-print(input)
-fish = simulate(input, 80)
+stages = [input.count(i) for i in range(9)]
+fish = simulate_2(stages, 256)
 print('Number of fish:', fish)
